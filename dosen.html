@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard Dosen</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background: #0f172a;
+    color: white;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    background: #020617;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    color: #3b82f6;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.sidebar a:hover {
+    color: #3b82f6;
+}
+
+/* CONTENT */
+.content {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #1e293b;
+}
+
+tr {
+    background: #0f172a;
+}
+
+tr:hover {
+    background: #1e293b;
+}
+
+/* STATUS */
+.aman {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.warning {
+    color: orange;
+    font-weight: bold;
+}
+
+.bahaya {
+    color: red;
+    font-weight: bold;
+}
+
+/* BUTTON */
+.btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+}
+
+.blok {
+    background: red;
+}
+
+.unblok {
+    background: green;
+}
+
+.organisasi {
+    background: #3b82f6;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>DOSEN</h2>
+
+    <a href="/dosen">Dashboard</a>
+
+    <a href="/data_organisasi">
+        Aktivitas Organisasi
+    </a>
+    <a href="/form_aktivitas">Tambah Aktivitas</a>
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="content">
+
+<h1>Monitoring Mahasiswa</h1>
+
+<a class="btn organisasi" href="/data_organisasi">
+    Lihat Aktivitas Organisasi
+</a>
+
+<table>
+
+<tr>
+    <th>Nama</th>
+    <th>Hadir</th>
+    <th>Persentase</th>
+    <th>Status Akademik</th>
+    <th>QR Absen</th>
+    <th>Aksi</th>
+</tr>
+
+{% for d in data %}
+<tr>
+
+    <td>{{ d.nama }}</td>
+
+    <td>{{ d.hadir }}</td>
+
+    <td>{{ d.persentase }}%</td>
+
+    <td>
+        {% if d.persentase >= 75 %}
+            <span class="aman">Aman</span>
+
+        {% elif d.persentase >= 50 %}
+            <span class="warning">Warning</span>
+
+        {% else %}
+            <span class="bahaya">Bahaya</span>
+        {% endif %}
+    </td>
+
+    <td>
+        <a class="btn organisasi"
+        href="/dosen/generate_qr/{{ d.id }}">
+            Buka QR
+        </a>
+    </td>
+
+    <td>
+
+        {% if d.status == 'aktif' %}
+
+            <a class="btn blok"
+            href="/blok/{{ d.id }}">
+                Blokir
+            </a>
+
+        {% else %}
+
+            <a class="btn unblok"
+            href="/unblok/{{ d.id }}">
+                Aktifkan
+            </a>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+<br><br>
+
+<canvas id="chartAbsensi"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const labels = [
+{% for d in data %}
+"{{ d.nama }}",
+{% endfor %}
+];
+
+const hadir = [
+{% for d in data %}
+{{ d.hadir }},
+{% endfor %}
+];
+
+new Chart(document.getElementById('chartAbsensi'), {
+
+    type: 'bar',
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+            label: 'Jumlah Kehadiran',
+            data: hadir
+        }]
+    }
+});
+
+</script>
+
+</div>
+
+</body>
+</html>

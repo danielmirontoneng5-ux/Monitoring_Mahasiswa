@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    display:flex;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:240px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#020617,#0f172a);
+    padding:30px 20px;
+    border-right:1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar h2{
+    font-size:30px;
+    color:#3b82f6;
+    margin-bottom:40px;
+    font-weight:700;
+}
+
+.sidebar a{
+    display:block;
+    color:#cbd5e1;
+    text-decoration:none;
+    padding:14px 18px;
+    margin-bottom:12px;
+    border-radius:12px;
+    transition:0.3s;
+    font-size:15px;
+    font-weight:500;
+}
+
+.sidebar a:hover{
+    background:#1e293b;
+    color:#3b82f6;
+    transform:translateX(5px);
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    margin-left:240px;
+    width:calc(100% - 240px);
+    padding:35px;
+}
+
+.title{
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:30px;
+}
+
+/* ================= MODERN CARD ================= */
+
+.card{
+    position:relative;
+    background:rgba(30,41,59,0.95);
+    border-radius:24px;
+    padding:30px;
+    margin-bottom:35px;
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    inset 0 1px 1px rgba(255,255,255,0.05);
+
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.4),
+    0 0 20px rgba(59,130,246,0.2);
+}
+
+/* glowing top effect */
+
+.card::before{
+    content:'';
+    position:absolute;
+    top:-100px;
+    right:-100px;
+    width:220px;
+    height:220px;
+    background:radial-gradient(circle,#3b82f655,transparent 70%);
+}
+
+.card::after{
+    content:'';
+    position:absolute;
+    bottom:-120px;
+    left:-120px;
+    width:240px;
+    height:240px;
+    background:radial-gradient(circle,#2563eb33,transparent 70%);
+}
+
+.card h3{
+    font-size:26px;
+    margin-bottom:25px;
+    color:white;
+    position:relative;
+    z-index:2;
+}
+
+/* ================= FORM ================= */
+
+.form-group{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    position:relative;
+    z-index:2;
+}
+
+input, select{
+    background:#334155;
+    border:none;
+    outline:none;
+    padding:14px 18px;
+    border-radius:14px;
+    color:white;
+    min-width:220px;
+    transition:0.3s;
+    font-size:14px;
+}
+
+input:focus,
+select:focus{
+    border:1px solid #3b82f6;
+    box-shadow:0 0 15px rgba(59,130,246,0.3);
+}
+
+input::placeholder{
+    color:#cbd5e1;
+}
+
+/* ================= BUTTON ================= */
+
+button{
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    border:none;
+    padding:14px 22px;
+    border-radius:14px;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(59,130,246,0.4);
+}
+
+/* ================= TABLE ================= */
+
+.table-container{
+    overflow-x:auto;
+    position:relative;
+    z-index:2;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:18px;
+}
+
+th{
+    background:#020617;
+    color:#3b82f6;
+    padding:18px;
+    font-size:15px;
+}
+
+td{
+    padding:18px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    text-align:center;
+    color:#e2e8f0;
+}
+
+tr{
+    transition:0.3s;
+}
+
+tr:hover{
+    background:#1e293b;
+}
+
+/* ================= ACTION BUTTON ================= */
+
+.btn-edit{
+    background:orange;
+    padding:10px 16px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    margin-right:6px;
+    transition:0.3s;
+}
+
+.btn-edit:hover{
+    background:#ff9800;
+}
+
+.btn-delete{
+    background:red;
+    padding:10px 16px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.btn-delete:hover{
+    background:#dc2626;
+}
+
+/* ================= LINK ================= */
+
+.link-org{
+    color:#60a5fa;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.link-org:hover{
+    color:white;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .content{
+        margin-left:0;
+        width:100%;
+    }
+
+    body{
+        flex-direction:column;
+    }
+
+    .form-group{
+        flex-direction:column;
+    }
+
+    input,
+    select,
+    button{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <h2>ADMIN</h2>
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/data_organisasi">
+        Aktivitas Organisasi
+    </a>
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<!-- ================= CONTENT ================= -->
+
+<div class="content">
+
+    <div class="title">
+        Dashboard Monitoring Mahasiswa
+    </div>
+
+    <!-- ================= TAMBAH KELAS ================= -->
+
+    <div class="card">
+
+        <h3>Tambah Kelas</h3>
+
+        <form method="POST" action="/tambah_kelas">
+
+            <div class="form-group">
+
+                <input
+                    type="text"
+                    name="nama_kelas"
+                    placeholder="Masukkan Nama Kelas"
+                    required
+                >
+
+                <button type="submit">
+                    Tambah Kelas
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= TAMBAH MAHASISWA ================= -->
+
+    <div class="card">
+
+        <h3>Tambah Mahasiswa</h3>
+
+        <form method="POST" action="/tambah_mahasiswa">
+
+            <div class="form-group">
+
+                <input
+                    type="text"
+                    name="nama"
+                    placeholder="Nama Mahasiswa"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="nim"
+                    placeholder="NIM"
+                    required
+                >
+
+                <select name="kelas_id" required>
+
+                    <option value="">
+                        Pilih Kelas
+                    </option>
+
+                    {% for k in kelas %}
+                    <option value="{{ k.id }}">
+                        {{ k.nama_kelas }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit">
+                    Tambah
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= FILTER ================= -->
+
+    <div class="card">
+
+        <h3>Filter Mahasiswa Per Kelas</h3>
+
+        <form method="POST" action="/filter_kelas">
+
+            <div class="form-group">
+
+                <select
+                    name="kelas_id"
+                    onchange="this.form.submit()"
+                >
+
+                    <option value="">
+                        -- Pilih Kelas --
+                    </option>
+
+                    {% for k in kelas %}
+                    <option value="{{ k.id }}">
+                        {{ k.nama_kelas }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= ORGANISASI ================= -->
+
+    <div style="margin-bottom:20px;">
+
+        <a class="link-org" href="/data_organisasi">
+            ➜ Lihat Aktivitas Organisasi Mahasiswa
+        </a>
+
+    </div>
+
+    <!-- ================= DATA MAHASISWA ================= -->
+
+    <div class="card">
+
+        <h3>Data Mahasiswa</h3>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Kelas</th>
+                    <th>Aksi</th>
+                </tr>
+
+                {% for m in mahasiswa %}
+
+                <tr>
+
+                    <td>{{ m.nama }}</td>
+
+                    <td>{{ m.nim }}</td>
+
+                    <td>{{ m.nama_kelas }}</td>
+
+                    <td>
+
+                        <a
+                            class="btn-edit"
+                            href="/edit_mahasiswa/{{ m.id }}"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            class="btn-delete"
+                            href="/hapus_mahasiswa/{{ m.id }}"
+                        >
+                            Hapus
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

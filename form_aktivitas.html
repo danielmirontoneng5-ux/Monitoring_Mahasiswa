@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tambah Aktivitas Organisasi</title>
+
+<style>
+:root{
+    --bg-dark:#0f172a;
+    --card:#1e293b;
+    --blue:#3b82f6;
+    --text:#f8fafc;
+    --dim:#94a3b8;
+}
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:var(--bg-dark);
+    color:var(--text);
+}
+
+.container{
+    max-width:700px;
+    margin:50px auto;
+    background:var(--card);
+    padding:30px;
+    border-radius:12px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:5px;
+    color:var(--dim);
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #334155;
+    background:#0f172a;
+    color:white;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:var(--blue);
+    border:none;
+    color:white;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2563eb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Tambah Aktivitas Organisasi</h1>
+
+<form method="POST" action="/tambah_aktivitas" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label>Mahasiswa</label>
+        <select name="mahasiswa_id">
+            {% for m in mahasiswa %}
+            <option value="{{ m.id }}">{{ m.nama }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Organisasi</label>
+        <select name="organisasi_id">
+            {% for o in organisasi %}
+            <option value="{{ o.id }}">{{ o.nama_organisasi }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Jabatan</label>
+        <input type="text" name="jabatan">
+    </div>
+
+    <div class="form-group">
+        <label>Periode Mulai</label>
+        <input type="date" name="periode_mulai">
+    </div>
+
+    <div class="form-group">
+        <label>Periode Selesai</label>
+        <input type="date" name="periode_selesai">
+    </div>
+
+    <div class="form-group">
+        <label>Deskripsi Tugas</label>
+        <input type="text" name="deskripsi_tugas">
+    </div>
+
+    <div class="form-group">
+        <label>Status</label>
+        <select name="status">
+            <option value="aktif">Aktif</option>
+            <option value="nonaktif">Non-Aktif</option>
+            <option value="selesai">Selesai</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Bukti</label>
+        <input type="file" name="bukti">
+    </div>
+
+    <button type="submit">Simpan</button>
+
+    
+    <button type="submit">Kembali Ke Dashboard</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

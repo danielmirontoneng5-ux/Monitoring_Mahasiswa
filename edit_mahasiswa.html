@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Mahasiswa</title>
+
+<style>
+
+body{
+    background:#0f172a;
+    font-family:Arial;
+    color:white;
+    padding:40px;
+}
+
+.card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:12px;
+    width:500px;
+    margin:auto;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#2563eb;
+}
+
+.btn-kembali{
+    display:block;
+    text-align:center;
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    margin-top:10px;
+    box-sizing:border-box;
+}
+
+.btn-kembali:hover{
+    background:#2563eb;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>Edit Mahasiswa</h2>
+
+    <form method="POST">
+
+        <!-- NAMA -->
+<label>Nama Mahasiswa</label>
+
+<input type="text"
+       name="nama"
+       value="{{ mahasiswa.nama }}"
+       required>
+
+        <!-- NIM -->
+        <label>NIM</label>
+
+        <input type="text"
+               name="nim"
+               value="{{ mahasiswa.nim }}"
+               required>
+
+        <!-- KELAS -->
+        <label>Kelas</label>
+
+        <select name="kelas_id">
+
+            {% for k in kelas %}
+
+            <option value="{{ k.id }}"
+            {% if mahasiswa.kelas_id == k.id %}
+            selected
+            {% endif %}
+            >
+                {{ k.nama_kelas }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">
+            Simpan Perubahan
+        </button>
+
+    </form>
+
+    <a href="/dashboard" class="btn-kembali">
+        Kembali ke Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

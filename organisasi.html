@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aktivitas Organisasi</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    padding:30px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2563eb;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:12px;
+    border-bottom:1px solid #334155;
+    text-align:left;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:6px;
+}
+
+.aktif{
+    background:green;
+}
+
+.nonaktif{
+    background:red;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Aktivitas Organisasi</h1>
+
+<div class="card">
+
+<h3>Tambah Aktivitas Organisasi</h3>
+
+<form method="POST" action="/tambah_organisasi">
+
+<select name="organisasi_id" required>
+    <option value="">Pilih Organisasi</option>
+
+    <option value="{{ o.id }}">
+    {{ o.nama_organisasi }} - {{ o.jenis }}
+</option>
+</select>
+
+<input type="text"
+name="jabatan"
+placeholder="Jabatan"
+required>
+
+<select name="status">
+    <option value="aktif">Aktif</option>
+    <option value="nonaktif">Nonaktif</option>
+</select>
+
+<button type="submit">
+    Simpan
+</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h3>Data Organisasi Saya</h3>
+
+<table>
+
+<tr>
+    <th>Organisasi</th>
+    <th>Jenis</th>
+    <th>Jabatan</th>
+    <th>Status</th>
+</tr>
+
+{% for d in data %}
+<tr>
+
+<td>{{ d.nama_organisasi }}</td>
+
+<td>{{ d.jenis }}</td>
+
+<td>{{ d.jabatan }}</td>
+
+<td>
+    <span class="status {{ d.status }}">
+        {{ d.status }}
+    </span>
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

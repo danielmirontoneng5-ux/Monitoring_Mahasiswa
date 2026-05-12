@@ -1,0 +1,298 @@
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#0f172a;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#020617,#0f172a);
+    padding:25px;
+    box-shadow:4px 0 25px rgba(0,0,0,0.5);
+}
+
+.sidebar h2{
+    color:#3b82f6;
+    text-align:center;
+    margin-bottom:40px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.sidebar a{
+    display:block;
+    padding:14px 18px;
+    margin-bottom:14px;
+    color:#e2e8f0;
+    text-decoration:none;
+    border-radius:14px;
+    transition:0.3s;
+    font-weight:500;
+}
+
+.sidebar a:hover{
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    transform:translateX(5px);
+    box-shadow:0 8px 20px rgba(59,130,246,0.4);
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    margin-left:290px;
+    padding:35px;
+}
+
+.content h1{
+    font-size:38px;
+    margin-bottom:25px;
+    color:white;
+}
+
+.content h1 span{
+    color:#3b82f6;
+}
+
+/* ================= CARD ================= */
+
+.card{
+    background:linear-gradient(145deg,#1e293b,#0f172a);
+    border-radius:24px;
+    padding:30px;
+    margin-bottom:35px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.45);
+    border:1px solid rgba(59,130,246,0.15);
+}
+
+/* ================= FORM MODERN ================= */
+
+.tambah-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.tambah-card::before{
+    content:"";
+    position:absolute;
+    top:-50px;
+    right:-50px;
+    width:180px;
+    height:180px;
+    background:rgba(59,130,246,0.08);
+    border-radius:50%;
+}
+
+.header-form{
+    position:relative;
+    z-index:2;
+}
+
+.header-form h2{
+    margin:0;
+    font-size:32px;
+    color:#3b82f6;
+    font-weight:bold;
+}
+
+.header-form p{
+    color:#94a3b8;
+    margin-top:10px;
+    margin-bottom:30px;
+    font-size:15px;
+}
+
+/* ================= FORM ================= */
+
+.modern-form{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:10px;
+    color:#cbd5e1;
+    font-size:14px;
+    font-weight:600;
+}
+
+.modern-form input,
+.modern-form select{
+    padding:16px;
+    border:none;
+    border-radius:16px;
+    background:#020617;
+    color:white;
+    font-size:15px;
+    outline:none;
+    transition:0.3s;
+    border:1px solid transparent;
+}
+
+.modern-form input::placeholder{
+    color:#64748b;
+}
+
+.modern-form input:focus,
+.modern-form select:focus{
+    border:1px solid #3b82f6;
+    box-shadow:0 0 0 4px rgba(59,130,246,0.2);
+    transform:translateY(-2px);
+}
+
+/* ================= BUTTON ================= */
+
+.btn-modern{
+    grid-column:span 2;
+    padding:18px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+.btn-modern:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(59,130,246,0.45);
+}
+
+/* ================= TABLE ================= */
+
+.table-card{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+th{
+    background:#020617;
+    color:#3b82f6;
+    padding:18px;
+    text-align:left;
+    font-size:15px;
+}
+
+td{
+    padding:18px;
+    border-bottom:1px solid #1e293b;
+    color:#e2e8f0;
+}
+
+tr{
+    transition:0.3s;
+}
+
+tr:hover{
+    background:rgba(59,130,246,0.08);
+}
+
+/* ================= STATUS ================= */
+
+.status{
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.aktif{
+    background:rgba(34,197,94,0.2);
+    color:#22c55e;
+}
+
+.nonaktif{
+    background:rgba(239,68,68,0.2);
+    color:#ef4444;
+}
+
+/* ================= BUTTON AKSI ================= */
+
+.btn-aksi{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:12px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:0.3s;
+    margin-right:6px;
+}
+
+.btn-edit{
+    background:linear-gradient(90deg,#f59e0b,#fbbf24);
+}
+
+.btn-edit:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(245,158,11,0.4);
+}
+
+.btn-hapus{
+    background:linear-gradient(90deg,#dc2626,#ef4444);
+}
+
+.btn-hapus:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(239,68,68,0.4);
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#3b82f6;
+    border-radius:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .content{
+        margin-left:0;
+    }
+
+    .modern-form{
+        grid-template-columns:1fr;
+    }
+
+    .btn-modern{
+        grid-column:span 1;
+    }
+
+}

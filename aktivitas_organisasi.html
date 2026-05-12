@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktivitas Organisasi - Monitoring</title>
+    <style>
+        /* CSS KONSEP DASHBOARD MODERN */
+        :root {
+            --bg-dark: #0f172a;
+            --sidebar-dark: #020617;
+            --card-dark: #1e293b;
+            --accent-blue: #3b82f6;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            min-h-screen;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-dark);
+            height: 100vh;
+            position: fixed;
+            padding: 20px;
+            border-right: 1px solid #334155;
+        }
+
+        .sidebar h2 {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+
+        /* MAIN CONTENT */
+        .content {
+            margin-left: 290px;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .header-section {
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .header-section p {
+            color: var(--text-dim);
+            margin-top: 5px;
+        }
+
+        /* CARD FORM */
+        .card {
+            background-color: var(--card-dark);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 600px;
+            border: 1px solid #334155;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-dark);
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .btn-modern {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-modern:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>DOSEN</h2>
+    <nav>
+        <a href="/dosen">Dashboard</a>
+        <a href="/data_organisasi" class="active">Aktivitas Organisasi</a>
+        <a href="/form_aktivitas">Tambah Aktivitas</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</div>
+
+<div class="content">
+    <div class="header-section">
+        <h1>Aktivitas Mahasiswa</h1>
+        <p>Manajemen data keterlibatan organisasi mahasiswa</p>
+    </div>
+
+    <div class="card">
+        <form method="POST" action="/tambah_aktivitas">
+            <div class="form-group">
+                <label>Pilih Mahasiswa</label>
+                <select name="mahasiswa_id" required>
+                    <option value="">-- Pilih Mahasiswa --</option>
+                    {% for m in mahasiswa %}
+                    <option value="{{ m.id }}">{{ m.nama }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Organisasi</label>
+                <select name="organisasi_id" required>
+                    <option value="">-- Pilih Organisasi --</option>
+                    {% for o in organisasi %}
+                    <option value="{{ o.id }}">{{ o.nama_organisasi }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Jabatan</label>
+                <input type="text" name="jabatan" placeholder="Ketua, Sekretaris, Anggota..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status" required>
+                    <option value="aktif">Aktif</option>
+                    <option value="nonaktif">Non-Aktif</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-modern">+ Tambah Aktivitas</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: white;
+}
+
+/* CONTAINER */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT */
+.left {
+    flex: 1;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.left p {
+    font-size: 18px;
+}
+
+.left span {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* RIGHT */
+.right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background: #020617;
+    padding: 40px;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: #1e293b;
+    color: white;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* INFO */
+.role-info {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+    opacity: 0.7;
+}

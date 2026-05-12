@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard Mahasiswa</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background: #0f172a;
+    color: white;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    background: #020617;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    color: #3b82f6;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.sidebar a:hover {
+    color: #3b82f6;
+}
+
+/* CONTENT */
+.content {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #1e293b;
+}
+
+tr {
+    background: #0f172a;
+}
+
+tr:hover {
+    background: #1e293b;
+}
+
+/* BUTTON */
+.btn {
+    padding: 6px 10px;
+    background: #3b82f6;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #2563eb;
+}
+
+/* STATUS */
+.aktif {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.blokir {
+    color: #ef4444;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Mahasiswa</h2>
+    <a href="/mahasiswa">Dashboard</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="content">
+
+    <h1>Dashboard Mahasiswa</h1>
+
+    <div>
+        <p><b>Nama:</b> {{ mhs.nama }}</p>
+        <p><b>Status:</b> 
+            {% if mhs.status == 'aktif' %}
+                <span class="aktif">Aktif</span>
+            {% else %}
+                <span class="blokir">Diblokir</span>
+            {% endif %}
+        </p>
+    </div>
+
+    <h2>Jadwal Kuliah</h2>
+
+    <table>
+        <tr>
+            <th>Hari</th>
+            <th>Jam</th>
+            <th>Ruangan</th>
+            <th>Absensi</th>
+        </tr>
+
+        {% for j in jadwal %}
+        <tr>
+            <td>{{ j.hari }}</td>
+            <td>{{ j.jam }}</td>
+            <td>{{ j.ruangan }}</td>
+            <td>
+                {% if mhs.status == 'aktif' %}
+                    <a class="btn" href="/absen/{{ j.mata_kuliah_id }}">Absen</a>
+                {% else %}
+                    ❌ Tidak bisa absen
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<div id="reader" style="width:300px;"></div>
+
+<script>
+function onScanSuccess(decodedText) {
+    window.location.href = "/absen/" + decodedText.split("-")[1];
+}
+
+let scanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+scanner.render(onScanSuccess);
+</script>
+
+</div>
+
+</body>
+</html>
